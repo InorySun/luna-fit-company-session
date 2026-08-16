@@ -195,6 +195,24 @@
     .submit-btn { grid-column: 1 / -1; border: 0; border-radius: 14px; padding: 13px; color: #fff; background: var(--rose-dark); font-weight: 800; cursor: pointer; }
     .form-success { display: none; padding: 24px; border-radius: 20px; background: var(--sage-soft); text-align: center; }
     .form-success.show { display: block; }
+    .benefit-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+    .benefit-item { padding:22px; border-radius:22px; background:#fff; border:1px solid #eee7df; box-shadow:0 7px 0 rgba(197,105,137,.09); }
+    .benefit-item:nth-child(2n) { background:var(--rose-soft); border:0; }
+    .benefit-item:nth-child(3n) { background:var(--sage-soft); border:0; }
+    .benefit-item h3 { margin-bottom:7px; }
+    .benefit-item p { margin:0; color:var(--muted); font-size:16px; line-height:1.65; }
+    .salary-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:24px; align-items:stretch; }
+    .salary-selector, .salary-result { padding:26px; border-radius:24px; background:#fff; border:1px solid #eee7df; box-shadow:0 7px 0 rgba(197,105,137,.09); }
+    .salary-tabs { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:18px 0; }
+    .salary-btn { border:1px solid #e2d9d1; border-radius:13px; padding:12px 8px; background:#fff; color:var(--ink); font-weight:800; cursor:pointer; }
+    .salary-btn.active { color:#fff; background:var(--rose-dark); border-color:var(--rose-dark); }
+    .salary-total { padding:22px; border-radius:20px; background:linear-gradient(135deg,var(--rose-soft),#fff6df); text-align:center; }
+    .salary-total strong { display:block; color:var(--rose-dark); font-size:clamp(38px,5vw,64px); line-height:1.2; }
+    .salary-total span { color:var(--muted); font-size:14px; }
+    .salary-breakdown { margin-top:18px; }
+    .salary-row { display:flex; justify-content:space-between; gap:16px; padding:12px 4px; border-bottom:1px dashed #ddd3ca; }
+    .salary-row strong { color:var(--rose-dark); }
+    .salary-note { margin-top:15px; color:var(--muted); font-size:13px; line-height:1.6; }
 
     .closing .content { display: grid; place-items: center; text-align: center; }
     .closing h2 { font-size: clamp(44px, 7vw, 88px); margin-bottom: 20px; }
@@ -314,6 +332,8 @@
       .goal-buttons { gap:6px; }
       .goal-btn { padding:10px 3px; }
       .video-phases { grid-template-columns:repeat(2,1fr); }
+      .benefit-grid, .salary-grid { grid-template-columns:1fr; }
+      .benefit-item, .salary-selector, .salary-result { padding:19px; }
       .entry-form { grid-template-columns:1fr; }
       .field.full, .submit-btn { grid-column:auto; }
       .closing h2 { font-size:clamp(36px,10vw,54px); }
@@ -409,6 +429,41 @@
             <div class="appeal-card"><div class="appeal-num">01</div><h3>安心できる環境</h3><p>女性専用の明るく清潔な空間。運動が初めての方も安心して利用できます。</p></div>
             <div class="appeal-card"><div class="appeal-num">02</div><h3>幅広いサポート</h3><p>トレーニングだけでなく、健康・美容・生活習慣まで支えます。</p></div>
             <div class="appeal-card"><div class="appeal-num">03</div><h3>一人ひとりを大切に</h3><p>お客様の目標や悩みに合わせた、ていねいなサービスを提供します。</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="社員福利厚生">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">EMPLOYEE BENEFITS</div><h2>社員福利厚生</h2></div><div class="section-no">＋</div></div>
+          <p class="lead">働く人自身も、健康で前向きに成長できる環境を大切にします。</p>
+          <div class="benefit-grid">
+            <div class="benefit-item"><div class="icon">♨</div><h3>年間休日120日</h3><p>週休2日制。仕事とプライベートを両立できます。</p></div>
+            <div class="benefit-item"><div class="icon">✦</div><h3>ジム無料利用</h3><p>LUNA FITの施設を無料で利用し、自分の健康も守れます。</p></div>
+            <div class="benefit-item"><div class="icon">↗</div><h3>資格取得支援</h3><p>トレーナー資格や健康に関する勉強費用をサポートします。</p></div>
+            <div class="benefit-item"><div class="icon">♡</div><h3>美容・健康手当</h3><p>美容や健康づくりのために、毎月5,000円を支給します。</p></div>
+            <div class="benefit-item"><div class="icon">☀</div><h3>産休・育休制度</h3><p>ライフステージが変わっても、安心して働き続けられます。</p></div>
+            <div class="benefit-item"><div class="icon">☺</div><h3>研修・相談制度</h3><p>入社研修と定期面談で、一人ひとりの成長を支えます。</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="給与と希望給与">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">SALARY & CONDITIONS</div><h2>給与・希望給与</h2></div><div class="section-no">¥</div></div>
+          <p class="lead">役割や経験に合わせて、安心して成長できる給与制度を用意します。</p>
+          <div class="salary-grid">
+            <div class="salary-selector">
+              <h3>給与モデルを選ぶ</h3>
+              <div class="salary-tabs"><button class="salary-btn active" data-salary="trainer" type="button">トレーナー</button><button class="salary-btn" data-salary="staff" type="button">店舗スタッフ</button></div>
+              <div class="field"><label for="experienceYears">経験年数 <output id="experienceValue">未経験・新卒</output></label><input id="experienceYears" type="range" min="0" max="5" value="0"></div>
+              <div class="choice-summary" id="salaryMessage">未経験でも研修を受けながら成長できます。</div>
+            </div>
+            <div class="salary-result">
+              <div class="salary-total"><span>月収モデル</span><strong id="salaryTotal">23.5万円</strong><span>交通費・残業代は別途支給</span></div>
+              <div class="salary-breakdown"><div class="salary-row"><span>基本給</span><strong id="baseSalary">22万円</strong></div><div class="salary-row"><span>職務手当</span><strong id="roleAllowance">1万円</strong></div><div class="salary-row"><span>美容・健康手当</span><strong>0.5万円</strong></div></div>
+              <p class="salary-note">想定年収：282万円〜。昇給年1回、賞与年2回。表示金額は授業用の給与モデルです。</p>
+            </div>
           </div>
         </div></div>
       </section>
@@ -578,6 +633,28 @@
         document.getElementById('videoTip').textContent = videoTips[button.dataset.videoTip];
       }));
 
+      const salaryButtons = [...document.querySelectorAll('[data-salary]')];
+      const experienceYears = document.getElementById('experienceYears');
+      let salaryRole = 'trainer';
+      function updateSalary() {
+        const years = Number(experienceYears.value);
+        const isTrainer = salaryRole === 'trainer';
+        const base = (isTrainer ? 22 : 21) + years * .6;
+        const rolePay = (isTrainer ? 1 : .5) + (years >= 3 ? .5 : 0);
+        const total = base + rolePay + .5;
+        document.getElementById('experienceValue').textContent = years === 0 ? '未経験・新卒' : `経験${years}年`;
+        document.getElementById('baseSalary').textContent = `${base.toFixed(1).replace('.0','')}万円`;
+        document.getElementById('roleAllowance').textContent = `${rolePay.toFixed(1).replace('.0','')}万円`;
+        document.getElementById('salaryTotal').textContent = `${total.toFixed(1)}万円`;
+        document.getElementById('salaryMessage').textContent = years === 0 ? '未経験でも研修を受けながら成長できます。' : years < 3 ? '経験を活かし、早い段階からお客様を担当できます。' : 'リーダー候補として、後輩指導や店舗運営にも挑戦できます。';
+      }
+      salaryButtons.forEach(button => button.addEventListener('click', () => {
+        salaryRole = button.dataset.salary;
+        salaryButtons.forEach(item => item.classList.toggle('active', item === button));
+        updateSalary();
+      }));
+      experienceYears.addEventListener('input', updateSalary);
+
       const entryForm = document.getElementById('entryForm');
       const formSuccess = document.getElementById('formSuccess');
       entryForm.addEventListener('submit', event => {
@@ -603,6 +680,7 @@
       }));
 
       updatePlan();
+      updateSalary();
       show(0);
     })();
   </script>
