@@ -282,6 +282,47 @@
       .slide { min-height:auto; }
       .sheet { min-height:auto; }
     }
+
+    @media (max-width: 760px) {
+      body { overflow-x:hidden; }
+      body::before, body::after { font-size:22px; opacity:.65; }
+      .app { width:100%; padding-bottom:88px; }
+      .slides { width:100%; min-height:0; }
+      .slide { width:100%; min-height:0; padding:8px; transform:none; }
+      .slide:not(.active) { display:none; }
+      .slide.active { display:block; }
+      .sheet { width:100%; min-height:0; border-radius:22px; overflow:hidden; }
+      .content { width:100%; min-height:0; padding:26px 20px 110px; }
+      .cover .content { display:flex; flex-direction:column; gap:22px; align-items:stretch; }
+      .cover .tag { margin:22px 0 14px; }
+      .cover h1 { font-size:clamp(38px,11vw,58px); }
+      .cover .lead { font-size:17px; }
+      .cover .date { margin-top:24px; }
+      .anime-cover { width:100%; }
+      .anime-keyart { height:auto; max-height:none; width:min(82%,430px); }
+      .topline { align-items:flex-start; }
+      .topline h2 { font-size:clamp(30px,8.5vw,44px); margin-bottom:20px; }
+      .section-no { font-size:38px; }
+      .split { display:block; height:auto; }
+      .cards, .job-box, .profile-grid, .appeal, .timeline, .demo-grid, .media-grid, .form-layout { display:grid; grid-template-columns:1fr; gap:16px; }
+      .card, .job, .profile-panel, .appeal-card, .stage-card, .demo-controls, .demo-result, .coach-panel { padding:20px; }
+      .metrics { grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+      .metric { padding:10px 4px; }
+      .metric strong { font-size:20px; }
+      .metric span { font-size:10px; }
+      .chart-wrap { height:200px; margin-left:30px; }
+      .goal-buttons { gap:6px; }
+      .goal-btn { padding:10px 3px; }
+      .video-phases { grid-template-columns:repeat(2,1fr); }
+      .entry-form { grid-template-columns:1fr; }
+      .field.full, .submit-btn { grid-column:auto; }
+      .closing h2 { font-size:clamp(36px,10vw,54px); }
+      .controls { width:auto; max-width:calc(100% - 28px); bottom:12px; padding:8px 12px; gap:12px; }
+      .dots { display:none; }
+      .counter { min-width:62px; text-align:center; }
+      .nav-btn { width:42px; height:42px; flex:0 0 auto; }
+      .hint { display:none; }
+    }
   </style>
 </head>
 <body>
