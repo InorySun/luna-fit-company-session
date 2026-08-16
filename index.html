@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="女性専用フィットネスジム LUNA FIT 会社説明会">
+  <title>LUNA FIT｜会社説明会</title>
+  <style>
+    :root {
+      --ink: #25342f;
+      --muted: #66736e;
+      --cream: #fffaf4;
+      --paper: #fffefb;
+      --rose: #e98692;
+      --rose-dark: #c85d70;
+      --rose-soft: #fbe7e8;
+      --sage: #8eaa9d;
+      --sage-soft: #e8f0eb;
+      --gold: #d5aa62;
+      --shadow: 0 20px 60px rgba(79, 64, 57, .13);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(233,134,146,.17), transparent 28%),
+        radial-gradient(circle at 88% 88%, rgba(142,170,157,.22), transparent 30%),
+        #f5f0e9;
+      font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      overflow: hidden;
+    }
+
+    button { font: inherit; }
+
+    .app { min-height: 100vh; display: grid; grid-template-rows: 1fr auto; }
+
+    .slides { position: relative; min-height: 0; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 4vw, 58px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(22px);
+      transition: opacity .45s ease, transform .45s ease, visibility .45s;
+    }
+
+    .slide.active { opacity: 1; visibility: visible; transform: none; }
+
+    .sheet {
+      width: min(1180px, 100%);
+      height: min(720px, calc(100vh - 126px));
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.9);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      right: -130px; top: -155px;
+      background: var(--rose-soft);
+    }
+
+    .sheet::after {
+      content: "";
+      position: absolute;
+      width: 230px; height: 230px;
+      border-radius: 50%;
+      left: -130px; bottom: -140px;
+      background: var(--sage-soft);
+    }
+
+    .content { position: relative; z-index: 1; height: 100%; padding: clamp(32px, 5vw, 72px); }
+
+    .topline { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .12em; }
+    .logo-mark { width: 32px; height: 32px; color: var(--rose-dark); }
+    .eyebrow { color: var(--rose-dark); font-size: 14px; font-weight: 800; letter-spacing: .13em; }
+    .section-no { color: var(--rose); font: 700 clamp(38px, 6vw, 74px)/1 Georgia, serif; opacity: .34; }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(44px, 7vw, 90px); line-height: 1.03; letter-spacing: .03em; margin-bottom: 20px; }
+    h2 { font-size: clamp(34px, 4.8vw, 62px); line-height: 1.15; margin: 12px 0 30px; }
+    h3 { font-size: clamp(20px, 2vw, 28px); margin-bottom: 12px; }
+    p { font-size: clamp(17px, 1.7vw, 23px); line-height: 1.85; }
+    .lead { color: var(--muted); font-size: clamp(18px, 2.1vw, 27px); max-width: 720px; }
+    .accent { color: var(--rose-dark); }
+
+    .cover .content { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; }
+    .cover h1 span { display: block; color: var(--rose-dark); }
+    .tag { display: inline-block; border-radius: 999px; background: var(--sage-soft); color: #557267; padding: 9px 17px; font-weight: 700; margin-bottom: 28px; }
+    .cover-art { width: 100%; max-height: 490px; filter: drop-shadow(0 18px 20px rgba(65,87,77,.14)); }
+    .anime-cover { margin:0; display:grid; justify-items:center; align-content:center; min-width:0; }
+    .anime-keyart { width:auto; max-width:100%; height:min(57vh,520px); object-fit:contain; border-radius:22px; filter:drop-shadow(0 15px 18px rgba(64,45,57,.18)); }
+    .anime-cover figcaption { margin-top:9px; color:var(--muted); font-size:10px; text-align:center; }
+    .date { margin-top: 38px; color: var(--muted); font-size: 14px; letter-spacing: .12em; }
+
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(30px, 5vw, 72px); align-items: center; height: calc(100% - 54px); }
+    .illustration { width: 100%; max-height: 420px; }
+
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .card { padding: 22px; border-radius: 20px; background: #fff; border: 1px solid #eee7df; box-shadow: 0 8px 25px rgba(63,54,48,.06); }
+    .card p { margin: 0; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.65; color: var(--muted); }
+    .icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; margin-bottom: 15px; background: var(--rose-soft); color: var(--rose-dark); font-size: 21px; }
+
+    .job-box { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+    .job { border-radius: 24px; padding: 26px; }
+    .job:first-child { background: var(--rose-soft); }
+    .job:last-child { background: var(--sage-soft); }
+    .job ul, .profile-list { margin: 0; padding-left: 1.2em; font-size: clamp(16px, 1.4vw, 20px); line-height: 2; }
+    .small-note { margin-top: 18px; padding: 14px 18px; border-left: 4px solid var(--gold); background: #fff8e9; color: #765e36; font-size: 16px; }
+
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .profile-panel { border-radius: 24px; padding: 28px; background: #fff; border: 1px solid #eee7df; }
+    .profile-panel:first-child { background: var(--rose-soft); border: 0; }
+    .profile-panel h3 { display: flex; align-items: center; gap: 10px; }
+    .welcome { margin-top: 20px; color: var(--rose-dark); font-weight: 800; }
+
+    .appeal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 26px; }
+    .appeal-card { min-height: 245px; border-radius: 25px; padding: 26px; background: #fff; border: 1px solid #eee7df; }
+    .appeal-card:nth-child(2) { background: var(--rose-soft); border: 0; }
+    .appeal-card:nth-child(3) { background: var(--sage-soft); border: 0; }
+    .appeal-num { font: 700 42px/1 Georgia, serif; color: var(--rose); opacity: .55; }
+    .appeal-card p { font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; color: var(--muted); }
+
+    .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; position: relative; margin-top: 45px; }
+    .timeline::before { content: ""; position: absolute; height: 3px; left: 12%; right: 12%; top: 29px; background: linear-gradient(90deg, var(--rose), var(--gold), var(--sage)); }
+    .stage { position: relative; text-align: center; }
+    .dot { position: relative; z-index: 1; margin: 0 auto 22px; width: 60px; height: 60px; display: grid; place-items: center; border-radius: 50%; background: var(--paper); border: 4px solid var(--rose); font-weight: 900; }
+    .stage:nth-child(2) .dot { border-color: var(--gold); }
+    .stage:nth-child(3) .dot { border-color: var(--sage); }
+    .stage-card { min-height: 230px; padding: 24px 20px; border-radius: 22px; background: #fff; border: 1px solid #eee7df; }
+    .stage-card p { font-size: clamp(15px, 1.25vw, 18px); line-height: 1.75; color: var(--muted); }
+    .arrow { color: var(--rose-dark); font-weight: 900; }
+
+    .demo-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 28px; align-items: stretch; }
+    .demo-controls, .demo-result { border-radius: 24px; padding: 24px; background: #fff; border: 1px solid #eee7df; }
+    .control-group { margin-bottom: 20px; }
+    .control-group label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 9px; font-weight: 800; }
+    .control-group input[type="range"] { width: 100%; accent-color: var(--rose-dark); }
+    .goal-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .goal-btn { border: 1px solid #e2d9d1; border-radius: 12px; background: #fff; padding: 10px 6px; color: var(--ink); cursor: pointer; }
+    .goal-btn.active { color: #fff; background: var(--rose-dark); border-color: var(--rose-dark); }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .metric { padding: 12px; border-radius: 14px; background: var(--cream); text-align: center; }
+    .metric strong { display: block; color: var(--rose-dark); font-size: 24px; }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .chart-wrap { position: relative; height: 230px; border-left: 2px solid #d9d1c9; border-bottom: 2px solid #d9d1c9; margin: 8px 8px 24px 34px; }
+    .chart-grid { position: absolute; inset: 0; background: linear-gradient(to top, transparent 24%, #eee9e3 25%, transparent 26%, transparent 49%, #eee9e3 50%, transparent 51%, transparent 74%, #eee9e3 75%, transparent 76%); }
+    .chart-bars { position: absolute; inset: 12px 8px 0; display: flex; align-items: end; justify-content: space-around; gap: 8px; }
+    .bar { width: 11%; min-width: 18px; border-radius: 8px 8px 0 0; background: linear-gradient(#e98692, #c85d70); transition: height .4s ease; position: relative; }
+    .bar span { position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 11px; }
+    .chart-y { position: absolute; right: calc(100% + 8px); top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-between; color: var(--muted); font-size: 10px; }
+    .plan-line { font-size: 15px; color: var(--muted); margin: 0; }
+
+    .media-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 26px; }
+    .video-stage { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 24px; background: linear-gradient(145deg, #fbe7e8, #e8f0eb); }
+    .video-scene { width: 100%; height: 100%; }
+    .video-stage.playing .video-person { animation: squat 1.8s ease-in-out infinite; transform-origin: 50% 82%; }
+    .video-stage.playing .pulse-ring { animation: pulse 1.8s ease-out infinite; }
+    @keyframes squat { 0%,100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(24px) scaleY(.9); } }
+    @keyframes pulse { from { opacity:.7; transform:scale(.7); } to { opacity:0; transform:scale(1.25); } }
+    .video-overlay { position: absolute; inset: auto 16px 16px; display: flex; align-items: center; gap: 12px; padding: 10px 13px; border-radius: 15px; background: rgba(37,52,47,.86); color: #fff; }
+    .play-btn { width: 38px; height: 38px; border: 0; border-radius: 50%; background: var(--rose); color: #fff; cursor: pointer; }
+    .video-progress { width: 150px; accent-color: var(--rose); }
+    .video-time { font-size: 12px; min-width: 54px; }
+    .coach-panel { padding: 24px; border-radius: 24px; background: var(--sage-soft); }
+    .coach-tip { min-height: 88px; font-size: 18px; line-height: 1.7; }
+    .tip-dots { display: flex; gap: 6px; }
+    .tip-dot { width: 8px; height: 8px; border-radius: 50%; background: #b8c7c0; }
+    .tip-dot.active { background: var(--rose-dark); }
+
+    .form-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 32px; }
+    .entry-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { display: grid; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 13px; font-weight: 800; }
+    .field input, .field select, .field textarea { width: 100%; border: 1px solid #ded6cf; border-radius: 12px; padding: 11px 12px; background: #fff; color: var(--ink); font: inherit; }
+    .field textarea { min-height: 76px; resize: vertical; }
+    .submit-btn { grid-column: 1 / -1; border: 0; border-radius: 14px; padding: 13px; color: #fff; background: var(--rose-dark); font-weight: 800; cursor: pointer; }
+    .form-success { display: none; padding: 24px; border-radius: 20px; background: var(--sage-soft); text-align: center; }
+    .form-success.show { display: block; }
+
+    .closing .content { display: grid; place-items: center; text-align: center; }
+    .closing h2 { font-size: clamp(44px, 7vw, 88px); margin-bottom: 20px; }
+    .closing .message { max-width: 720px; }
+    .closing .logo { justify-content: center; margin-top: 34px; }
+
+    .controls { height: 78px; display: flex; align-items: center; justify-content: center; gap: 18px; padding: 12px 24px; }
+    .nav-btn { width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); color: var(--ink); box-shadow: 0 6px 18px rgba(52,43,38,.1); cursor: pointer; transition: transform .2s, background .2s; }
+    .nav-btn:hover { transform: translateY(-2px); background: #fff; }
+    .nav-btn:disabled { opacity: .35; cursor: default; transform: none; }
+    .dots { display: flex; gap: 8px; }
+    .page-dot { width: 8px; height: 8px; border: 0; padding: 0; border-radius: 999px; background: #cfc7be; cursor: pointer; transition: width .25s, background .25s; }
+    .page-dot.active { width: 28px; background: var(--rose-dark); }
+    .counter { min-width: 62px; color: var(--muted); font-size: 13px; letter-spacing: .1em; }
+    .hint { position: fixed; right: 24px; bottom: 26px; color: #8a817a; font-size: 12px; }
+
+    @media (max-width: 760px) {
+      body { overflow: auto; }
+      .app { min-height: 100svh; }
+      .sheet { height: auto; min-height: calc(100svh - 110px); }
+      .slide { padding: 12px; }
+      .content { padding: 28px 24px; }
+      .cover .content, .split { grid-template-columns: 1fr; }
+      .cover-art, .illustration { max-height: 220px; }
+      .cards, .job-box, .profile-grid, .appeal, .timeline { grid-template-columns: 1fr; }
+      .demo-grid, .media-grid, .form-layout { grid-template-columns: 1fr; }
+      .entry-form { grid-template-columns: 1fr; }
+      .field.full, .submit-btn { grid-column: auto; }
+      .appeal-card { min-height: auto; }
+      .timeline { gap: 16px; margin-top: 20px; }
+      .timeline::before { display: none; }
+      .stage-card { min-height: auto; }
+      .sheet { overflow-y: auto; }
+      .hint { display: none; }
+    }
+
+    @media print {
+      body { overflow: visible; background: #fff; }
+      .app { display: block; }
+      .slides { position: static; }
+      .slide { position: relative; opacity: 1; visibility: visible; transform: none; display: block; padding: 0; page-break-after: always; }
+      .sheet { width: 100%; height: 100vh; min-height: 0; box-shadow: none; border-radius: 0; }
+      .controls, .hint { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { .slide, .nav-btn, .page-dot { transition: none; } }
+
+    /* Web-app layout + anime-inspired visual system */
+    body { overflow-x: hidden; overflow-y: auto; background: linear-gradient(135deg, #fff3f7 0%, #f4fbff 52%, #f3fff9 100%); }
+    body::before { content:"✦"; position:fixed; left:3vw; top:12vh; color:#f2a8be; font-size:34px; animation:floatStar 3s ease-in-out infinite; pointer-events:none; }
+    body::after { content:"♡"; position:fixed; right:4vw; top:22vh; color:#9bcfc1; font-size:34px; animation:floatStar 3.7s ease-in-out infinite reverse; pointer-events:none; }
+    @keyframes floatStar { 50% { transform:translateY(-12px) rotate(8deg); } }
+    .app { min-height:100vh; display:block; padding-bottom:82px; }
+    .slides { position:relative; min-height:calc(100vh - 82px); }
+    .slide { position:absolute; min-height:calc(100vh - 82px); padding:clamp(14px,3vw,38px); align-items:start; }
+    .slide.active { position:relative; }
+    .sheet { width:min(1180px,100%); height:auto; min-height:min(720px,calc(100vh - 116px)); overflow:visible; border:3px solid rgba(255,255,255,.94); border-radius:32px; box-shadow:0 18px 0 rgba(202,107,139,.08), 0 25px 70px rgba(92,66,85,.13); }
+    .sheet::before { border:3px dashed rgba(233,134,146,.22); }
+    .content { height:auto; min-height:inherit; }
+    .logo { color:#b94d76; text-shadow:2px 2px 0 #ffe1eb; }
+    .tag { border:2px solid rgba(255,255,255,.9); box-shadow:0 5px 0 rgba(74,121,105,.1); }
+    .card, .profile-panel, .appeal-card, .stage-card, .demo-controls, .demo-result, .coach-panel { box-shadow:0 7px 0 rgba(197,105,137,.09); }
+    h2 { text-shadow:3px 3px 0 #ffe8ef; }
+    .controls { position:fixed; z-index:20; left:50%; bottom:14px; transform:translateX(-50%); height:auto; padding:10px 16px; border-radius:999px; background:rgba(255,255,255,.9); box-shadow:0 10px 32px rgba(74,54,67,.17); backdrop-filter:blur(12px); }
+    .nav-btn { color:#b94d76; border:2px solid #f5c8d6; }
+    .hint { z-index:20; }
+    .choice-summary { margin-top:14px; padding:14px 16px; border-radius:16px; background:#fff6df; color:#755b2c; font-weight:700; }
+    .extra-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+    .action-btn { border:2px solid #f2bfd0; border-radius:999px; padding:10px 16px; background:#fff; color:#af4e71; font-weight:800; cursor:pointer; box-shadow:0 4px 0 #f6d9e3; }
+    .action-btn:hover { transform:translateY(-2px); box-shadow:0 6px 0 #f6d9e3; }
+    .action-btn.primary { color:#fff; background:linear-gradient(135deg,#e986a2,#c85d82); border-color:#c85d82; }
+    .detail-pop { display:none; margin-top:14px; padding:16px; border-radius:16px; background:#fff; border:2px dashed #efb7ca; color:var(--muted); }
+    .detail-pop.show { display:block; animation:popIn .25s ease-out; }
+    @keyframes popIn { from { opacity:0; transform:scale(.97) translateY(6px); } }
+    .youtube-wrap { position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:24px; background:#242424; box-shadow:0 9px 0 rgba(200,93,112,.15); }
+    .youtube-wrap iframe, .youtube-wrap video { position:absolute; inset:0; width:100%; height:100%; border:0; object-fit:cover; background:#242424; }
+    .video-credit { margin-top:10px; font-size:12px; color:var(--muted); }
+    .video-phases { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:12px; }
+    .video-phases span { padding:7px 5px; border-radius:9px; background:var(--rose-soft); color:var(--rose-dark); text-align:center; font-size:12px; font-weight:800; }
+    .anime-ribbon { display:inline-flex; align-items:center; gap:7px; color:#ad5072; font-weight:800; }
+    .anime-ribbon::before, .anime-ribbon::after { content:"✦"; color:#e986a2; }
+
+    @media (max-height: 760px) and (min-width: 761px) {
+      .content { padding:34px 48px; }
+      .slide { min-height:auto; }
+      .sheet { min-height:auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="slides" id="slides" aria-live="polite">
+      <section class="slide active cover" aria-label="表紙">
+        <div class="sheet"><div class="content">
+          <div>
+            <div class="logo">
+              <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 3c3 9 9 15 18 18-9 3-15 9-18 24-3-15-9-21-18-24C15 18 21 12 24 3Z"/></svg>
+              LUNA FIT
+            </div>
+            <div style="margin-top:52px" class="tag">女性専用フィットネスジム</div>
+            <h1>わたしらしく、<span>もっと健やかに。</span></h1>
+            <p class="lead">運動・美容・生活習慣を通して、女性の毎日を支える会社です。</p>
+            <div class="date">COMPANY INFORMATION SESSION</div>
+          </div>
+          <figure class="anime-cover">
+            <img class="cover-art anime-keyart" src="dumbbell-anime-key-visual.jpg" alt="『ダンベル何キロ持てる？』の女性キャラクターがダンベルを持つキービジュアル">
+            <figcaption>© サンドロビッチ・ヤバ子／MAAM・小学館／シルバーマンジム</figcaption>
+          </figure>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="会社紹介">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">ABOUT US</div><h2>① 会社紹介</h2></div><div class="section-no">01</div></div>
+          <div class="split">
+            <div>
+              <h3>女性の健康と美しさを、<span class="accent">毎日の習慣</span>から。</h3>
+              <p>株式会社LUNA FITは、女性向けのフィットネスジムを運営する会社です。</p>
+              <p>女性が安心して運動できる環境をつくり、一人ひとりの健康や美容、生活習慣をサポートします。</p>
+            </div>
+            <div class="cards">
+              <div class="card"><div class="icon">✦</div><h3>フィットネス</h3><p>目標や体力に合わせた、無理のないトレーニング。</p></div>
+              <div class="card"><div class="icon">♡</div><h3>健康サポート</h3><p>運動を続けやすくするためのアドバイス。</p></div>
+              <div class="card"><div class="icon">☾</div><h3>美容</h3><p>心も体も前向きになれる、女性らしいサービス。</p></div>
+              <div class="card"><div class="icon">⌂</div><h3>安心できる場所</h3><p>初めての方も通いやすい、明るく清潔な空間。</p></div>
+            </div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="募集職種">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">RECRUIT</div><h2>② 募集職種</h2></div><div class="section-no">02</div></div>
+          <p class="lead">フィットネストレーナー・店舗スタッフとして、お客様の「続けたい」を支える仕事です。</p>
+          <div class="job-box">
+            <div class="job">
+              <h3>フィットネストレーナー</h3>
+              <ul><li>トレーニングのサポート</li><li>運動方法や健康のアドバイス</li><li>一人ひとりに合ったメニューの提案</li></ul>
+            </div>
+            <div class="job">
+              <h3>店舗スタッフ</h3>
+              <ul><li>受付・接客</li><li>施設の案内と店舗管理</li><li>お客様とのコミュニケーション</li></ul>
+            </div>
+          </div>
+          <div class="small-note">大切なのは、お客様の気持ちを考え、明るく丁寧にサポートすることです。</div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="求める人物像">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">OUR PEOPLE</div><h2>③ 求める人物像</h2></div><div class="section-no">03</div></div>
+          <div class="profile-grid">
+            <div class="profile-panel">
+              <h3><span>☀</span> 性格・マインド</h3>
+              <ul class="profile-list"><li>明るく、人と話すことが好きな人</li><li>お客様の気持ちを考え、丁寧に対応できる人</li><li>チームワークを大切にできる人</li><li>健康や運動に興味がある人</li></ul>
+            </div>
+            <div class="profile-panel">
+              <h3><span>✦</span> スキル・経験</h3>
+              <ul class="profile-list"><li>コミュニケーションを大切にできる</li><li>パソコンの基本操作ができる</li><li>接客経験があれば歓迎</li><li>トレーニングの知識があれば歓迎</li></ul>
+              <p class="welcome">未経験でも、意欲があれば応募できます。</p>
+            </div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="会社の魅力">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">WHY LUNA FIT?</div><h2>④ 会社の魅力</h2></div><div class="section-no">04</div></div>
+          <p class="lead">「女性専用」だからできる、安心と細やかなサポートが私たちの強みです。</p>
+          <div class="appeal">
+            <div class="appeal-card"><div class="appeal-num">01</div><h3>安心できる環境</h3><p>女性専用の明るく清潔な空間。運動が初めての方も安心して利用できます。</p></div>
+            <div class="appeal-card"><div class="appeal-num">02</div><h3>幅広いサポート</h3><p>トレーニングだけでなく、健康・美容・生活習慣まで支えます。</p></div>
+            <div class="appeal-card"><div class="appeal-num">03</div><h3>一人ひとりを大切に</h3><p>お客様の目標や悩みに合わせた、ていねいなサービスを提供します。</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="キャリアパス">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">CAREER PATH</div><h2>⑤ キャリアパス</h2></div><div class="section-no">05</div></div>
+          <p class="lead">仕事の基本から学び、少しずつ役割を広げていきます。</p>
+          <div class="timeline">
+            <div class="stage"><div class="dot">1</div><div class="stage-card"><h3>入社1年目</h3><p>仕事の基本や接客を学び、トレーナーとして経験を積みます。</p><div class="arrow">基本を身につける</div></div></div>
+            <div class="stage"><div class="dot">3</div><div class="stage-card"><h3>入社3年目</h3><p>お客様に合ったトレーニングを提案し、後輩の指導も行います。</p><div class="arrow">できることを広げる</div></div></div>
+            <div class="stage"><div class="dot">5+</div><div class="stage-card"><h3>将来（5年目〜）</h3><p>店舗責任者として運営に関わり、新店舗の立ち上げにも挑戦します。</p><div class="arrow">チームをリードする</div></div></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="プラン体験デモ">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">FITNESS PLAN LAB</div><h2>あなた向けプランを体験</h2></div><div class="section-no">06</div></div>
+          <div class="demo-grid">
+            <div class="demo-controls">
+              <h3>3つのおすすめコース</h3>
+              <p style="font-size:15px;color:var(--muted)">タブを選ぶと、LUNA FITがおすすめする固定プランに切り替わります。</p>
+              <div class="goal-buttons" role="tablist" aria-label="おすすめコース"><button class="goal-btn active" data-goal="health" type="button" role="tab" aria-selected="true">健康</button><button class="goal-btn" data-goal="beauty" type="button" role="tab" aria-selected="false">美容</button><button class="goal-btn" data-goal="strength" type="button" role="tab" aria-selected="false">体力</button></div>
+              <div class="choice-summary" id="planText">健康習慣コース：週3回・1回30分</div>
+              <div class="cards" style="grid-template-columns:1fr;margin-top:16px"><div class="card"><h3 id="courseTitle">健康習慣コース</h3><p id="courseDetail">ストレッチと軽い筋力トレーニングで、無理なく運動習慣をつくります。</p></div></div>
+              <div class="extra-actions"><button class="action-btn" id="menuBtn" type="button">メニューを見る</button><button class="action-btn primary" id="coachBtn" type="button">コーチの一言</button></div>
+              <div class="detail-pop" id="coursePop" aria-live="polite"></div>
+            </div>
+            <div class="demo-result">
+              <div class="metrics"><div class="metric"><strong id="weeklyMinutes">120</strong><span>運動時間／週</span></div><div class="metric"><strong id="habitScore">72%</strong><span>習慣づくり目安</span></div><div class="metric"><strong id="coachCount">2</strong><span>コーチ面談／月</span></div></div>
+              <h3>8週間の変化イメージ</h3>
+              <div class="chart-wrap" role="img" aria-label="8週間の運動習慣スコアの棒グラフ"><div class="chart-grid"></div><div class="chart-y"><span>100</span><span>50</span><span>0</span></div><div class="chart-bars" id="chartBars"></div></div>
+            </div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="トレーニング動画体験">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">TRAINING EXPERIENCE</div><h2>プロストレッチ動画体験</h2></div><div class="section-no">07</div></div>
+          <div class="media-grid">
+            <div><div class="youtube-wrap"><video controls playsinline preload="metadata" aria-label="約60秒の女性向け全身ストレッチ動画"><source src="luna-fit-stretching-complete.mp4" type="video/mp4">お使いのブラウザは動画再生に対応していません。</video></div><div class="video-phases" aria-label="動画の流れ"><span>0–5秒<br>準備</span><span>5–14秒<br>上半身</span><span>14–30秒<br>ヨガ</span><span>30–59秒<br>全身</span></div><p class="video-credit">Complete 59-second stretching demo / Footage: Pexels</p></div>
+            <aside class="coach-panel"><div class="tag">WATCH POINT</div><h3>動画を見るポイント</h3><p class="coach-tip">呼吸を止めず、痛みを感じない範囲でゆっくり伸ばしましょう。動画は10分間です。授業では好きな場面だけ再生できます。</p><div class="extra-actions"><button class="action-btn" data-video-tip="before" type="button">運動前</button><button class="action-btn" data-video-tip="after" type="button">運動後</button><button class="action-btn" data-video-tip="caution" type="button">注意点</button></div><div class="detail-pop show" id="videoTip">まずは肩の力を抜き、自然な呼吸から始めます。</div></aside>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide" aria-label="応募フォーム">
+        <div class="sheet"><div class="content">
+          <div class="topline"><div><div class="eyebrow">JOB APPLICATION</div><h2>应聘申请｜応募フォーム</h2></div><div class="section-no">08</div></div>
+          <div class="form-layout">
+            <div><h3>あなたの「好き」を仕事に。</h3><p>健康や運動、人とのコミュニケーションに興味がある方を歓迎します。</p><div class="small-note">授業用の応募デモです。入力内容は外部へ送信・保存されません。</div><div class="extra-actions"><button class="action-btn" data-fill="trainer" type="button">トレーナー例を入力</button><button class="action-btn" data-fill="staff" type="button">店舗スタッフ例を入力</button></div></div>
+            <div><form class="entry-form" id="entryForm"><div class="field"><label for="name">氏名</label><input id="name" required placeholder=" 野比 のび太"></div><div class="field"><label for="role">応募職種</label><select id="role"><option>フィットネストレーナー</option><option>店舗スタッフ</option></select></div><div class="field"><label for="school">学校・学科</label><input id="school" required placeholder="ＡＲＣ東京日本語学校"></div><div class="field"><label for="startDate">入社希望時期</label><select id="startDate"><option>2027年4月</option><option>相談したい</option></select></div><div class="field full"><label for="interest">志望理由</label><select id="interest"><option>運動を通して女性を支えたい</option><option>健康・美容に興味がある</option><option>接客の仕事が好き</option></select></div><div class="field full"><label for="message">自己PR</label><textarea id="message" required placeholder="あなたの強みや経験を書いてください"></textarea></div><button class="submit-btn" type="submit">応募内容を確認する</button></form><div class="form-success" id="formSuccess"><h3>応募内容を確認しました ✦</h3><p id="successText">ご応募ありがとうございます。</p><button class="goal-btn" id="formReset" type="button">内容を修正する</button></div></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide closing" aria-label="最後のメッセージ">
+        <div class="sheet"><div class="content"><div>
+          <div class="eyebrow">MESSAGE</div>
+          <h2>一緒に、女性の毎日を<br><span class="accent">もっと輝かせませんか？</span></h2>
+          <p class="lead message">LUNA FITは、お客様にも働く人にも、前向きな変化が生まれる場所を目指しています。</p>
+          <div class="logo"><svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 3c3 9 9 15 18 18-9 3-15 9-18 24-3-15-9-21-18-24C15 18 21 12 24 3Z"/></svg>LUNA FIT</div>
+          <p style="margin-top:24px;font-size:16px;color:var(--muted)">ご清聴ありがとうございました。</p>
+        </div></div></div>
+      </section>
+    </div>
+
+    <nav class="controls" aria-label="スライド操作">
+      <button class="nav-btn" id="prev" type="button" aria-label="前のページ">←</button>
+      <div class="dots" id="dots" aria-label="ページ一覧"></div>
+      <span class="counter" id="counter">01 / 07</span>
+      <button class="nav-btn" id="next" type="button" aria-label="次のページ">→</button>
+    </nav>
+    <div class="hint">← → キーでも操作できます</div>
+  </main>
+
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll('.slide')];
+      const dots = document.getElementById('dots');
+      const counter = document.getElementById('counter');
+      const prev = document.getElementById('prev');
+      const next = document.getElementById('next');
+      let current = 0;
+
+      slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'page-dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `${index + 1}ページ目へ`);
+        dot.addEventListener('click', () => show(index));
+        dots.appendChild(dot);
+      });
+
+      function show(index) {
+        current = Math.max(0, Math.min(slides.length - 1, index));
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+        [...dots.children].forEach((dot, i) => dot.classList.toggle('active', i === current));
+        counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+        prev.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+      }
+
+      prev.addEventListener('click', () => show(current - 1));
+      next.addEventListener('click', () => show(current + 1));
+      document.addEventListener('keydown', (event) => {
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+        if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); show(current + 1); }
+        if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); show(current - 1); }
+        if (event.key === 'Home') show(0);
+        if (event.key === 'End') show(slides.length - 1);
+      });
+
+      const goalButtons = [...document.querySelectorAll('.goal-btn[data-goal]')];
+      const chartBars = document.getElementById('chartBars');
+      let goal = 'health';
+      const courses = {
+        health: { title:'健康習慣コース', days:3, minutes:30, score:78, coaches:2, base:43, detail:'ストレッチと軽い筋力トレーニングで、無理なく運動習慣をつくります。', menu:'ウォームアップ5分 → 全身トレーニング15分 → ストレッチ10分', coach:'短い時間でも、週3回続けることが健康への一番の近道です！' },
+        beauty: { title:'ビューティーコース', days:2, minutes:45, score:72, coaches:2, base:38, detail:'姿勢づくりと体幹トレーニングを中心に、しなやかな体を目指します。', menu:'姿勢チェック5分 → 体幹・下半身25分 → 美姿勢ストレッチ15分', coach:'体重だけでなく、姿勢や体のラインの変化も一緒に確認しましょう！' },
+        strength: { title:'体力アップコース', days:4, minutes:40, score:88, coaches:3, base:34, detail:'全身の筋力と持久力を少しずつ高め、疲れにくい体をつくります。', menu:'動的ストレッチ5分 → サーキット25分 → クールダウン10分', coach:'頑張る日と休む日のバランスも、トレーニングの大切な一部です！' }
+      };
+
+      for (let week = 1; week <= 8; week += 1) {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.innerHTML = `<span>${week}週</span>`;
+        chartBars.appendChild(bar);
+      }
+
+      function updatePlan() {
+        const course = courses[goal];
+        document.getElementById('weeklyMinutes').textContent = course.days * course.minutes;
+        document.getElementById('habitScore').textContent = `${course.score}%`;
+        document.getElementById('coachCount').textContent = course.coaches;
+        document.getElementById('planText').textContent = `${course.title}：週${course.days}回・1回${course.minutes}分`;
+        document.getElementById('courseTitle').textContent = course.title;
+        document.getElementById('courseDetail').textContent = course.detail;
+        document.getElementById('coursePop').classList.remove('show');
+        [...chartBars.children].forEach((bar, index) => {
+          const value = course.base + (course.score - course.base) * ((index + 1) / 8);
+          bar.style.height = `${value}%`;
+          bar.setAttribute('aria-label', `${index + 1}週目 ${Math.round(value)}ポイント`);
+        });
+      }
+
+      goalButtons.forEach(button => button.addEventListener('click', () => {
+        goal = button.dataset.goal;
+        goalButtons.forEach(item => item.classList.toggle('active', item === button));
+        goalButtons.forEach(item => item.setAttribute('aria-selected', String(item === button)));
+        updatePlan();
+      }));
+      document.getElementById('menuBtn').addEventListener('click', () => {
+        const pop = document.getElementById('coursePop');
+        pop.textContent = `今日のメニュー：${courses[goal].menu}`;
+        pop.classList.add('show');
+      });
+      document.getElementById('coachBtn').addEventListener('click', () => {
+        const pop = document.getElementById('coursePop');
+        pop.textContent = `コーチ：${courses[goal].coach}`;
+        pop.classList.add('show');
+      });
+
+      const videoTips = { before:'運動前は、反動をつけすぎない動的ストレッチで体を温めます。', after:'運動後は、呼吸を整えながら各ポーズを20〜30秒キープします。', caution:'痛みや違和感がある場合は中止し、無理に深く伸ばさないでください。' };
+      document.querySelectorAll('[data-video-tip]').forEach(button => button.addEventListener('click', () => {
+        document.getElementById('videoTip').textContent = videoTips[button.dataset.videoTip];
+      }));
+
+      const entryForm = document.getElementById('entryForm');
+      const formSuccess = document.getElementById('formSuccess');
+      entryForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        document.getElementById('successText').textContent = `${name}さん、ご参加ありがとうございます。LUNA FITでお会いできることを楽しみにしています。`;
+        entryForm.style.display = 'none';
+        formSuccess.classList.add('show');
+      });
+      document.getElementById('formReset').addEventListener('click', () => {
+        entryForm.reset();
+        entryForm.style.display = 'grid';
+        formSuccess.classList.remove('show');
+      });
+
+      document.querySelectorAll('[data-fill]').forEach(button => button.addEventListener('click', () => {
+        const trainer = button.dataset.fill === 'trainer';
+        document.getElementById('name').value = '野比 のび太';
+        document.getElementById('school').value = 'ＡＲＣ東京日本語学校';
+        document.getElementById('role').value = trainer ? 'フィットネストレーナー' : '店舗スタッフ';
+        document.getElementById('interest').value = trainer ? '運動を通して女性を支えたい' : '接客の仕事が好き';
+        document.getElementById('message').value = trainer ? '明るさと継続力が私の強みです。運動を通して、お客様の目標を支えたいです。' : '人と話すことが好きです。相手の気持ちを考えた丁寧な接客を大切にしています。';
+      }));
+
+      updatePlan();
+      show(0);
+    })();
+  </script>
+</body>
+</html>
